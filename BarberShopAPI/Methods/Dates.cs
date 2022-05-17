@@ -15,7 +15,7 @@ namespace BarberShopAPI.Methods
             {
                 conn.Open();
 
-                SqlCommand command = new(Settings.Database.Queries.Dates.CreateDate, conn);
+                SqlCommand command = new(Settings.Database.Queries.Dates.Create, conn);
                 command.Parameters.AddWithValue("@Client", IdCliente);
                 command.Parameters.AddWithValue("@Service", Service);
                 command.Parameters.AddWithValue("@Day", Day);

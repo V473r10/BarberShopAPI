@@ -10,10 +10,8 @@ namespace BarberShopAPI.Controllers
     {
         [HttpGet]
         [Route("Services")]
-        //public IActionResult GetServices()
         public JsonResult GetServices()
         {
-            //return Json(Services.GetServices());
             return Json(Services.GetServices());
         }
 

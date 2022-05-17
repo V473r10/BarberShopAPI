@@ -21,7 +21,7 @@ namespace BarberShopAPI.Data
             try
             {
                 conn.Open();
-                SqlCommand command = new(Settings.Database.Queries.Services.GetServices, conn);
+                SqlCommand command = new(Settings.Database.Queries.Services.Get, conn);
                 SqlDataReader reader = command.ExecuteReader();
                 
                 if (reader.HasRows) {
@@ -51,7 +51,7 @@ namespace BarberShopAPI.Data
             try
             {
                 conn.Open();
-                SqlCommand command = new(Settings.Database.Queries.Services.AddService, conn);
+                SqlCommand command = new(Settings.Database.Queries.Services.Add, conn);
                 command.Parameters.AddWithValue("@Name", Name);
                 command.Parameters.AddWithValue("@Price", Price);
                 int rows = command.ExecuteNonQuery();
