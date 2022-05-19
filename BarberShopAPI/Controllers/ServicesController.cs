@@ -21,5 +21,25 @@ namespace BarberShopAPI.Controllers
         {
             return Ok(Services.AddService(Name, Price));
         }
+
+        [HttpPut]
+        [Route("Services/Name")]
+        public IActionResult UpdateName(int Id, string Name)
+        {
+            return Ok(Services.UpdateName(Id, Name));
+        }
+
+        [HttpPut]
+        [Route("Services/Price")]
+        public IActionResult UpdatePrice(int Id, int Price)
+        {
+            return Ok(Services.UpdatePrice(Id, Price));
+        }
+        [HttpDelete]
+        [Route("Services")]
+        public IActionResult DeleteService(int Id)
+        {
+            return Ok(Services.DeleteService(Id));
+        }
     }
 }

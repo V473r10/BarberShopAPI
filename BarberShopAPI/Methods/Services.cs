@@ -1,11 +1,7 @@
-﻿using BarberShopAPI.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
-using System;
-using System.Collections.Generic;
+﻿
 using System.Data;
 using System.Data.SqlClient;
-using System.Text.Json;
+using BarberShopAPI.Settings;
 
 namespace BarberShopAPI.Data
 {
@@ -13,9 +9,7 @@ namespace BarberShopAPI.Data
     {
         public static DataTable GetServices()
         {
-            DataTable services = new DataTable();
-            
-
+            DataTable services = new DataTable();  
             SqlConnection conn = new(Settings.Database.ConnectionString);
 
             try
@@ -27,11 +21,6 @@ namespace BarberShopAPI.Data
                 if (reader.HasRows) {
                     services.Load(reader);
                 }
-
-                //SqlDataAdapter adapter = new SqlDataAdapter(command);
-                //adapter.Fill(services);
-
-                //adapter.Dispose();
             }
             catch (SqlException)
             {
@@ -68,6 +57,76 @@ namespace BarberShopAPI.Data
             finally { conn.Close(); }
             return result;
         }
+
+        public static string UpdateName(int Id, string Name)
+        {
+            string response = string.Empty;
+            SqlConnection conn = new(Database.ConnectionString);
+
+            try
+            {
+                conn.Open();
+                SqlCommand command = new(Database.Queries.Services.UpdateName, conn);
+                command.Parameters.AddWithValue("@Id", Id);
+                command.Parameters.AddWithValue("@Name", Name);
+                int rows = command.ExecuteNonQuery();
+                response = rows > 0 ? "Success" : "Fail";
+
+            }
+            catch(SqlException)
+            {
+                throw;
+            }
+            finally { conn.Close(); }
+            return response;
+
+        }
+
+        public static string UpdatePrice(int Id, int Price)
+        {
+            string response = string.Empty;
+            SqlConnection conn = new(Database.ConnectionString);
+
+            try
+            {
+                conn.Open();
+                SqlCommand command = new(Database.Queries.Services.UpdatePrice, conn);
+                command.Parameters.AddWithValue("@Id", Id);
+                command.Parameters.AddWithValue("@Price", Price);
+                int rows = command.ExecuteNonQuery();
+                response = rows > 0 ? "Success" : "Fail";
+
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            finally { conn.Close(); }
+            return response;
+        }
+
+        public static string DeleteService(int Id)
+        {
+            string response = string.Empty;
+            SqlConnection conn = new(Database.ConnectionString);
+
+            try
+            {
+                conn.Open();
+                SqlCommand command = new(Database.Queries.Services.Delete, conn);
+                command.Parameters.AddWithValue("@Id", Id);
+                int rows = command.ExecuteNonQuery();
+                response = rows > 0 ? "Success" : "Fail";
+
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            finally { conn.Close(); }
+            return response;
+        }
+
 
         
     }

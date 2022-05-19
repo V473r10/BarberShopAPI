@@ -55,6 +55,8 @@
             {
                 private static readonly string get = @"SELECT * FROM Dates";
 
+                private static readonly string getDate = @"Select * From Dates WHERE Id = @Id";
+
                 private static readonly string create = @"INSERT INTO Dates (Client, Service, ExtraServices, Day, Hour) VALUES (@Client, @Service, @ExtraServices, @Day, @Hour)";
 
                 public static readonly string update = @"UPDATE Dates SET Day = @Day, Hour = @Hour WHERE Id = @Id";
@@ -62,6 +64,7 @@
                 public static readonly string delete = @"Delete Dates WHERE Id = @Id";
 
                 public static string Get { get { return get; } }
+                public static string GetDate { get { return getDate; } }
                 public static string Create { get { return create; } }
                 public static string Update { get { return update; } }
                 public static string Delete { get { return delete; } }

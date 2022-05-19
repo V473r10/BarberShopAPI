@@ -27,5 +27,26 @@ namespace BarberShopAPI.Controllers
         {
             return Ok(Methods.Clients.CreateClient(Name, Phone, Email));
         }
+
+        [HttpPut]
+        [Route("Client")]
+        public IActionResult UpdateClient(int Id, string Name, string Phone, string Email)
+        {
+            return Ok(Methods.Clients.UpdateClient(Id, Name, Phone, Email));
+        }
+
+        [HttpPut]
+        [Route("UpgradeClient")]
+        public IActionResult UpgradeClient(int Id)
+        {
+            return Ok(Methods.Clients.UpgradeClient(Id));
+        }
+
+        [HttpDelete]
+        [Route("Client")]
+        public IActionResult DeleteClient(int Id)
+        {
+            return Ok(Methods.Clients.DeleteClient(Id));
+        }
     }
 }
